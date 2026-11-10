@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#25134f" />
+  <title>O Sentido das Palavras</title>
+
+  <style>
+    :root {
+      --roxo: #32146d;
+      --roxo-claro: #6f42c1;
+      --rosa: #ef4f9b;
+      --amarelo: #ffd166;
+      --verde: #35c48d;
+      --vermelho: #ef6461;
+      --fundo: #f7f4ff;
+      --texto: #211936;
+      --branco: #ffffff;
+      --sombra: 0 12px 30px rgba(45, 25, 90, 0.14);
+      --raio: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at top right, #eadcff 0, transparent 28%),
+        var(--fundo);
+      line-height: 1.5;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    header {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(50, 20, 109, .95), rgba(111, 66, 193, .88)),
+        radial-gradient(circle at 20% 20%, #ef4f9b, transparent 28%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    header::after {
+      content: "A  B  C  D  E  F  G";
+      position: absolute;
+      font-size: 9rem;
+      font-weight: bold;
+      color: rgba(255,255,255,.05);
+      transform: rotate(-12deg);
+      right: -100px;
+      bottom: 20px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.28);
+      padding: 8px 15px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      font-size: .9rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      line-height: .98;
+      margin-bottom: 22px;
+      letter-spacing: -3px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.2rem;
+      color: #eee7ff;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn-primary {
+      background: var(--amarelo);
+      color: #392250;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      margin-left: 10px;
+    }
+
+    .brain-art {
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .brain {
+      width: 240px;
+      height: 190px;
+      background: linear-gradient(135deg, #ff7db7, #c84c99);
+      border-radius: 52% 48% 45% 55% / 58% 48% 52% 42%;
+      box-shadow: 12px 18px 0 rgba(28, 9, 69, .2);
+      position: relative;
+      animation: floating 4s ease-in-out infinite;
+    }
+
+    .brain::before,
+    .brain::after {
+      content: "";
+      position: absolute;
+      border: 5px solid rgba(255,255,255,.42);
+      border-radius: 50%;
+      width: 100px;
+      height: 120px;
+      top: 30px;
+    }
+
+    .brain::before {
+      left: 18px;
+      transform: rotate(15deg);
+    }
+
+    .brain::after {
+      right: 18px;
+      transform: rotate(-15deg);
+    }
+
+    .bubble {
+      position: absolute;
+      background: white;
+      color: var(--roxo);
+      border-radius: 18px;
+      padding: 12px 17px;
+      font-weight: bold;
+      box-shadow: var(--sombra);
+    }
+
+    .bubble.one { top: 25px; right: 25px; }
+    .bubble.two { bottom: 25px; left: 15px; }
+    .bubble.three { top: 125px; right: -5px; }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-15px) rotate(4deg); }
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+
+    .section-title h2 {
+      color: var(--roxo);
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: #625879;
+      font-size: 1.08rem;
+    }
+
+    .how-it-works {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: white;
+      padding: 25px;
+      border-radius: var(--raio);
+      box-shadow: var(--sombra);
+      text-align: center;
+    }
+
+    .step-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .step h3 {
+      color: var(--roxo);
+      margin-bottom: 7px;
+    }
+
+    #game {
+      background: #eee9ff;
+    }
+
+    .game-box {
+      max-width: 780px;
+      margin: auto;
+      background: white;
+      border-radius: 28px;
+      box-shadow: var(--sombra);
+      padding: clamp(22px, 5vw, 45px);
+    }
+
+    .game-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 20px;
+      color: var(--roxo);
+      font-weight: bold;
+    }
+
+    .progress {
+      height: 11px;
+      background: #e5def7;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--rosa), var(--roxo-claro));
+      transition: width .3s;
+    }
+
+    .challenge-illustration {
+      font-size: 5rem;
+      text-align: center;
+      margin: 10px 0 18px;
+    }
+
+    .question {
+      text-align: center;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: bold;
+      margin-bottom: 25px;
+      color: var(--roxo);
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      border: 2px solid #e5def7;
+      background: #fbfaff;
+      color: var(--texto);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: left;
+      transition: .2s;
+    }
+
+    .answer:hover {
+      border-color: var(--roxo-claro);
+      background: #f2ecff;
+      transform: translateX(3px);
+    }
+
+    .answer.correct {
+      background: #ddf8ec;
+      border-color: var(--verde);
+    }
+
+    .answer.wrong {
+      background: #ffe3e1;
+      border-color: var(--vermelho);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #f5f1ff;
+      border-left: 5px solid var(--roxo-claro);
+    }
+
+    .feedback strong {
+      display: block;
+      color: var(--roxo);
+      margin-bottom: 5px;
+    }
+
+    .next-area {
+      text-align: right;
+      margin-top: 25px;
+    }
+
+    #nextButton {
+      display: none;
+      background: var(--roxo);
+      color: white;
+    }
+
+    .result {
+      display: none;
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rosa), var(--roxo));
+      color: white;
+      display: grid;
+      place-items: center;
+      margin: 20px auto;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: var(--sombra);
+    }
+
+    .neuro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .neuro-card {
+      background: white;
+      border-radius: var(--raio);
+      padding: 30px;
+      box-shadow: var(--sombra);
+    }
+
+    .neuro-card h3 {
+      color: var(--roxo);
+      margin-bottom: 12px;
+    }
+
+    .neuro-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+    }
+
+    .qr-section {
+      background: var(--roxo);
+      color: white;
+      text-align: center;
+    }
+
+    .qr-placeholder {
+      background: white;
+      color: var(--roxo);
+      max-width: 430px;
+      margin: 25px auto;
+      padding: 25px;
+      border-radius: var(--raio);
+    }
+
+    .qr-box {
+      width: 190px;
+      height: 190px;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      border: 8px solid var(--roxo);
+      background:
+        linear-gradient(45deg, #32146d 25%, transparent 25%),
+        linear-gradient(-45deg, #32146d 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #32146d 75%),
+        linear-gradient(-45deg, transparent 75%, #32146d 75%);
+      background-size: 38px 38px;
+      background-position: 0 0, 0 19px, 19px -19px, -19px 0;
+      position: relative;
+    }
+
+    .qr-box::after {
+      content: "QR";
+      background: white;
+      color: var(--roxo);
+      padding: 8px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      background: #21103f;
+      color: #d9cdf5;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 800px) {
+      .hero,
+      .neuro {
+        grid-template-columns: 1fr;
+      }
+
+      .brain-art {
+        min-height: 270px;
+      }
+
+      .how-it-works {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      header {
+        min-height: auto;
+        padding: 80px 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .how-it-works {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-secondary {
+        margin: 10px 0 0;
+      }
+
+      .game-top {
+        font-size: .9rem;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container hero">
+      <div>
+        <span class="tag">Jogo educativo e interativo</span>
+        <h1>O sentido das palavras</h1>
+        <p>
+          Uma experiência para descobrir como o cérebro usa o contexto
+          para entender palavras que podem ter mais de um significado.
+        </p>
+        <a href="#game" class="btn btn-primary">Começar desafio</a>
+        <a href="#como-funciona" class="btn btn-secondary">Como funciona</a>
+      </div>
+
+      <div class="brain-art" aria-label="Ilustração de um cérebro">
+        <div class="brain"></div>
+        <div class="bubble one">banco</div>
+        <div class="bubble two">manga</div>
+        <div class="bubble three">vela</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-title">
+          <h2>Uma jornada pelo significado</h2>
+          <p>
+            Observe o contexto, escolha uma resposta e veja como sua mente
+            interpreta cada palavra.
+          </p>
+        </div>
+
+        <div class="how-it-works">
+          <div class="step">
+            <div class="step-icon">📱</div>
+            <h3>1. Aponte</h3>
+            <p>Aponte a câmera do celular para o QR Code.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">🧠</div>
+            <h3>2. Interprete</h3>
+            <p>Leia cada frase prestando atenção ao contexto.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">💡</div>
+            <h3>3. Descubra</h3>
+            <p>Receba uma explicação para cada resposta.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">🏆</div>
+            <h3>4. Pontue</h3>
+            <p>Veja seu resultado e aprenda como o cérebro funciona.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="game">
+      <div class="container">
+        <div class="section-title">
+          <h2>Desafio das palavras</h2>
+          <p>São oito situações. Não tenha pressa: o contexto é a pista.</p>
+        </div>
+
+        <div class="game-box">
+          <div id="quiz">
+            <div class="game-top">
+              <span id="challengeNumber">Desafio 1 de 8</span>
+              <span id="score">Pontuação: 0</span>
+            </div>
+
+            <div class="progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="challenge-illustration" id="illustration">🏦</div>
+
+            <div class="question" id="question"></div>
+
+            <div class="answers" id="answers"></div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="next-area">
+              <button class="btn" id="nextButton">Próximo desafio →</button>
+            </div>
+          </div>
+
+          <div class="result" id="result">
+            <div class="challenge-illustration">🎉</div>
+            <h2>Você concluiu a experiência!</h2>
+
+            <div class="score-circle">
+              <span id="finalScore">0/8</span>
+            </div>
+
+            <p id="finalMessage"></p>
+
+            <button class="btn btn-primary" onclick="restartGame()">
+              Jogar novamente
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="neuro">
+      <div class="container">
+        <div class="section-title">
+          <h2>O que acontece no cérebro?</h2>
+          <p>
+            Entender uma palavra não é apenas consultar um dicionário mental.
+            O cérebro combina várias pistas ao mesmo tempo.
+          </p>
+        </div>
+
+        <div class="neuro">
+          <div class="neuro-card">
+            <div class="neuro-icon">🧩</div>
+            <h3>O contexto seleciona o significado</h3>
+            <p>
+              Quando encontramos uma palavra ambígua, o cérebro ativa possíveis
+              significados. Em seguida, usa as palavras ao redor, a situação e
+              o conhecimento anterior para selecionar a interpretação mais
+              provável.
+            </p>
+          </div>
+
+          <div class="neuro-card">
+            <div class="neuro-icon">⚡</div>
+            <h3>Processamento rápido e preditivo</h3>
+            <p>
+              A linguagem é processada de maneira dinâmica. O cérebro faz
+              previsões continuamente e compara essas previsões com o que está
+              sendo lido ou ouvido.
+            </p>
+          </div>
+
+          <div class="neuro-card">
+            <div class="neuro-icon">🔄</div>
+            <h3>Memória e experiência ajudam</h3>
+            <p>
+              Experiências anteriores, emoções e conhecimentos armazenados na
+              memória influenciam a maneira como interpretamos uma mesma palavra
+              em situações diferentes.
+            </p>
+          </div>
+
+          <div class="neuro-card">
+            <div class="neuro-icon">🎯</div>
+            <h3>O erro também ensina</h3>
+            <p>
+              Quando uma resposta não combina com o contexto, o cérebro ajusta
+              sua interpretação. Esse processo ajuda a aprender novas relações
+              entre palavras, situações e significados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="qr-section">
+      <div class="container">
+        <h2>Leve a experiência para qualquer lugar</h2>
+        <p>
+          Gere um QR Code com o endereço publicado deste site e coloque-o em
+          cartazes, salas de aula ou exposições.
+        </p>
+
+        <div class="qr-placeholder">
+          <div class="qr-box" aria-label="Espaço reservado para QR Code"></div>
+          <p style="margin-top: 18px;">
+            Substitua este espaço pelo QR Code do endereço público do projeto.
+          </p>
+        </div>
+
+        <p>
+          O projeto pode ser hospedado gratuitamente em plataformas como
+          GitHub Pages, Netlify ou Vercel.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    O SENTIDO DAS PALAVRAS · Projeto educativo sobre linguagem, contexto e cérebro
+  </footer>
+
+  <script>
+    const challenges = [
+      {
+        illustration: "🏦",
+        question: "“O banco estava cheio de pessoas esperando atendimento.” O que significa “banco”?",
+        options: [
+          "Instituição financeira",
+          "Assento comprido",
+          "Margem de um rio"
+        ],
+        answer: 0,
+        explanation:
+          "A expressão “atendimento” e a presença de pessoas esperando indicam uma instituição financeira."
+      },
+      {
+        illustration: "🥭",
+        question: "“A manga da camisa ficou manchada.” O que significa “manga”?",
+        options: [
+          "Fruta tropical",
+          "Parte da roupa que cobre o braço",
+          "Objeto usado para escrever"
+        ],
+        answer: 1,
+        explanation:
+          "A palavra “camisa” cria o contexto necessário para entender que manga é uma parte da roupa."
+      },
+      {
+        illustration: "🕯️",
+        question: "“A vela iluminou a sala durante a queda de energia.” O que significa “vela”?",
+        options: [
+          "Objeto que produz luz quando aceso",
+          "Peça de um barco",
+          "Pequena bandeira"
+        ],
+        answer: 0,
+        explanation:
+          "A queda de energia e a iluminação indicam uma vela feita de cera."
+      },
+      {
+        illustration: "🐭",
+        question: "“O rato do computador parou de funcionar.” O que significa “rato”?",
+        options: [
+          "Animal roedor",
+          "Dispositivo usado para controlar o computador",
+          "Pessoa muito silenciosa"
+        ],
+        answer: 1,
+        explanation:
+          "A expressão “do computador” direciona o significado para o dispositivo eletrônico."
+      },
+      {
+        illustration: "👄",
+        question: "“Ela ficou com água na boca ao sentir o cheiro da comida.” O que significa a expressão?",
+        options: [
+          "Ela estava com sede",
+          "Ela ficou com vontade de comer",
+          "Ela havia acabado de escovar os dentes"
+        ],
+        answer: 1,
+        explanation:
+          "Nesse contexto, “água na boca” é uma expressão relacionada ao desejo de comer."
+      },
+      {
+        illustration: "🛩️",
+        question: "“O avião levantou voo.” O que significa “voo” nessa frase?",
+        options: [
+          "A ação de voar",
+          "Uma mentira",
+          "Uma corrida terrestre"
+        ],
+        answer: 0,
+        explanation:
+          "Como o sujeito é um avião, “voo” se refere à ação de voar."
+      },
+      {
+        illustration: "🪶",
+        question: "“Ele tem uma mão leve para desenhar.” O que significa “mão leve”?",
+        options: [
+          "A mão pesa pouco",
+          "Ele desenha com delicadeza e habilidade",
+          "Ele não consegue segurar objetos"
+        ],
+        answer: 1,
+        explanation:
+          "A expressão é figurada: indica delicadeza, controle e habilidade ao desenhar."
+      },
+      {
+        illustration: "🌳",
+        question: "“A raiz do problema está na falta de comunicação.” O que significa “raiz”?",
+        options: [
+          "Parte subterrânea de uma planta",
+          "Origem ou causa principal",
+          "Uma espécie de folha"
+        ],
+        answer: 1,
+        explanation:
+          "Em sentido figurado, “raiz” significa a origem ou causa mais profunda de algo."
+      }
+    ];
+
+    let current = 0;
+    let points = 0;
+    let answered = false;
+
+    const illustration = document.getElementById("illustration");
+    const question = document.getElementById("question");
+    const answers = document.getElementById("answers");
+    const feedback = document.getElementById("feedback");
+    const nextButton = document.getElementById("nextButton");
+    const score = document.getElementById("score");
+    const challengeNumber = document.getElementById("challengeNumber");
+    const progressBar = document.getElementById("progressBar");
+    const quiz = document.getElementById("quiz");
+    const result = document.getElementById("result");
+    const finalScore = document.getElementById("finalScore");
+    const finalMessage = document.getElementById("finalMessage");
+
+    function loadChallenge() {
+      const item = challenges[current];
+
+      answered = false;
+      illustration.textContent = item.illustration;
+      question.textContent = item.question;
+      challengeNumber.textContent = `Desafio ${current + 1} de ${challenges.length}`;
+      progressBar.style.width = `${(current / challenges.length) * 100}%`;
+      feedback.style.display = "none";
+      nextButton.style.display = "none";
+      answers.innerHTML = "";
+
+      item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "answer";
+        button.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+        button.addEventListener("click", () => selectAnswer(index, button));
+        answers.appendChild(button);
+      });
+    }
+
+    function selectAnswer(selected, selectedButton) {
+      if (answered) return;
+
+      answered = true;
+      const item = challenges[current];
+      const allAnswers = document.querySelectorAll(".answer");
+
+      allAnswers.forEach((button, index) => {
+        button.disabled = true;
+
+        if (index === item.answer) {
+          button.classList.add("correct");
+        }
+      });
+
+      if (selected === item.answer) {
+        points++;
+        selectedButton.classList.add("correct");
+
+        feedback.innerHTML = `
+          <strong>✅ Você acertou!</strong>
+          ${item.explanation}
+        `;
+      } else {
+        selectedButton.classList.add("wrong");
+
+        feedback.innerHTML = `
+          <strong>💭 Quase lá!</strong>
+          ${item.explanation}
+        `;
+      }
+
+      score.textContent = `Pontuação: ${points}`;
+      feedback.style.display = "block";
+      nextButton.style.display = "inline-block";
+    }
+
+    nextButton.addEventListener("click", () => {
+      current++;
+
+      if (current < challenges.length) {
+        loadChallenge();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quiz.style.display = "none";
+      result.style.display = "block";
+      finalScore.textContent = `${points}/${challenges.length}`;
+
+      let message = "";
+
+      if (points === 8) {
+        message =
+          "Excelente! Você percebeu com precisão como o contexto orienta o significado das palavras.";
+      } else if (points >= 5) {
+        message =
+          "Muito bem! Você já utiliza várias pistas contextuais para interpretar a linguagem.";
+      } else if (points >= 3) {
+        message =
+          "Bom começo! Observe com mais atenção as palavras ao redor e a situação apresentada.";
+      } else {
+        message =
+          "Cada erro é uma oportunidade de aprender. Repare como o contexto muda o significado.";
+      }
+
+      finalMessage.textContent = message;
+    }
+
+    function restartGame() {
+      current = 0;
+      points = 0;
+      score.textContent = "Pontuação: 0";
+      quiz.style.display = "block";
+      result.style.display = "none";
+      loadChallenge();
+
+      document.getElementById("game").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    loadChallenge();
+  </script>
+</body>
+</html>
