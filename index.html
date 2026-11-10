@@ -482,7 +482,10 @@
           Uma experiência para descobrir como o cérebro usa o contexto
           para entender palavras que podem ter mais de um significado.
         </p>
-        <a href="#game" class="btn btn-primary">Começar desafio</a>
+        <a href="#game" class="btn btn-primary" id="startButton">
+  Começar desafio
+</a>
+
         <a href="#como-funciona" class="btn btn-secondary">Como funciona</a>
       </div>
 
@@ -844,7 +847,16 @@
       current++;
 
       if (current < challenges.length) {
-        loadChallenge();
+      document.addEventListener("DOMContentLoaded", () => {
+  loadChallenge();
+
+  document.getElementById("startButton").addEventListener("click", () => {
+    document.getElementById("game").scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+
       } else {
         showResult();
       }
