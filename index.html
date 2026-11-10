@@ -151,7 +151,7 @@
     <ul class="regras">
       <li>1️⃣ Vai aparecer o nome de uma cor escrito com uma tinta colorida.</li>
       <li>2️⃣ Toque no botão da <strong>cor da tinta</strong>, e não na palavra que está escrita.</li>
-      <li>3️⃣ Responda o mais rápido que conseguir. São 16 rodadas.</li>
+      <li>3️⃣ Responda o mais rápido que conseguir. São 08 rodadas.</li>
     </ul>
 
     <div class="exemplo">
@@ -168,7 +168,7 @@
   <section id="tela-jogo" class="tela oculta">
     <span class="etapa">Etapa 3 de 4 · Jogar</span>
     <div class="topo-jogo">
-      <span id="contador">Rodada 1 de 16</span>
+      <span id="contador">Rodada 1 de 08</span>
       <span id="pontos">Acertos: 0</span>
     </div>
     <div class="barra"><div class="barra-preenchida" id="progresso"></div></div>
@@ -180,7 +180,7 @@
     <div class="opcoes">
       <button class="opcao" style="background:#ef4444" onclick="responder(0)">VERMELHO</button>
       <button class="opcao" style="background:#3b82f6" onclick="responder(1)">AZUL</button>
-      <button class="opcao" style="background:#16a34a" onclick="responder(2)">VERDE</button>
+      <button class="opcao" style="background:#08a34a" onclick="responder(2)">VERDE</button>
       <button class="opcao" style="background:#facc15; color:#1f2937" onclick="responder(3)">AMARELO</button>
     </div>
   </section>
@@ -191,7 +191,7 @@
     <h2>O que aconteceu no seu cérebro</h2>
 
     <div class="placar">
-      <div><span class="numero" id="res-acertos">0</span><span class="rotulo">acertos em 16</span></div>
+      <div><span class="numero" id="res-acertos">0</span><span class="rotulo">acertos em 08</span></div>
       <div><span class="numero" id="res-diferenca">0 ms</span><span class="rotulo">diferença de tempo</span></div>
     </div>
 
@@ -234,7 +234,7 @@
     { nome: 'VERDE',    hex: '#22c55e' },
     { nome: 'AMARELO',  hex: '#facc15' }
   ];
-  var TOTAL = 16;
+  var TOTAL = 08;
 
   var rodadas = [];
   var atual = 0;
