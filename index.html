@@ -18,10 +18,7 @@
     justify-content: center;
   }
   
-  .app { 
-    max-width: 600px;
-    width: 100%;
-  }
+  .app { max-width: 600px; width: 100%; }
   
   .tela {
     background: #ffffff;
@@ -38,7 +35,6 @@
   
   .oculta { display: none !important; }
   
-  /* Header */
   .header {
     margin-bottom: 32px;
     text-align: center;
@@ -84,7 +80,6 @@
     color: #4a4a4a;
   }
   
-  /* Cards */
   .cartao {
     background: linear-gradient(135deg, #f8f7ff 0%, #fff5f8 100%);
     border-left: 5px solid #F8A9C7;
@@ -99,13 +94,9 @@
     box-shadow: 0 8px 24px rgba(248, 169, 199, 0.15);
   }
   
-  .cartao strong {
-    color: #6B5B95;
-  }
-  
+  .cartao strong { color: #6B5B95; }
   .cartao p { margin-bottom: 0; }
   
-  /* Lista de Regras */
   ul.regras {
     list-style: none;
     margin-bottom: 24px;
@@ -127,7 +118,6 @@
     transform: translateX(4px);
   }
   
-  /* Exemplo */
   .exemplo {
     background: linear-gradient(135deg, #6B5B95 0%, #8B7BA8 100%);
     border-radius: 20px;
@@ -150,11 +140,8 @@
     letter-spacing: 3px;
   }
   
-  .exemplo strong {
-    color: #F4E4A6;
-  }
+  .exemplo strong { color: #F4E4A6; }
   
-  /* Botões */
   .botao {
     display: block;
     width: 100%;
@@ -176,9 +163,7 @@
     box-shadow: 0 12px 30px rgba(248, 169, 199, 0.4);
   }
   
-  .botao:active {
-    transform: translateY(0px);
-  }
+  .botao:active { transform: translateY(0px); }
   
   .botao.secundario {
     background: linear-gradient(135deg, #e8e8f0 0%, #f5f5f8 100%);
@@ -190,7 +175,6 @@
     background: linear-gradient(135deg, #dcdce8 0%, #ececf0 100%);
   }
   
-  /* --- TELA DE JOGO --- */
   .topo-jogo {
     display: flex;
     justify-content: space-between;
@@ -200,14 +184,12 @@
     font-size: 14px;
   }
   
-  .barra-container {
-    margin-bottom: 24px;
-  }
+  .barra-container { margin-bottom: 24px; }
   
   .barra {
     background: #e8e8f0;
     border-radius: 20px;
-    height: 8px;
+    heightpx;
     overflow: hidden;
     margin-top: 8px;
   }
@@ -255,15 +237,8 @@
     transition: all 0.3s;
   }
   
-  .certo {
-    color: #22c55e;
-    animation: pulse 0.5s;
-  }
-  
-  .errado {
-    color: #ef4444;
-    animation: shake 0.4s;
-  }
+  .certo { color: #22c55e; animation: pulse 0.5s; }
+  .errado { color: #ef4444; animation: shake 0.4s; }
   
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
@@ -301,11 +276,8 @@
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   }
   
-  .opcao:active {
-    transform: translateY(-1px);
-  }
+  .opcao:active { transform: translateY(-1px); }
   
-  /* --- TELA DE RESULTADO --- */
   .placar {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -352,9 +324,7 @@
     margin-bottom: 20px;
   }
   
-  .linha-tempo:last-child {
-    margin-bottom: 0;
-  }
+  .linha-tempo:last-child { margin-bottom: 0; }
   
   .linha-tempo span {
     font-size: 14px;
@@ -378,13 +348,8 @@
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   
-  #barra-igual {
-    background: linear-gradient(90deg, #22c55e 0%, #86efac 100%);
-  }
-  
-  #barra-diferente {
-    background: linear-gradient(90deg, #F8A9C7 0%, #F4E4A6 100%);
-  }
+  #barra-igual { background: linear-gradient(90deg, #22c55e 0%, #86efac 100%); }
+  #barra-diferente { background: linear-gradient(90deg, #F8A9C7 0%, #F4E4A6 100%); }
   
   #mensagem-resultado {
     font-weight: 600;
@@ -490,8 +455,17 @@
 
     <div class="comparacao">
       <div class="linha-tempo">
-        <span>Palavra e tinta iguais:</span>
-        <span style="font-size: 18px; color: #6B5B95;"><span id="tempo-igual">0</span> ms</span>
+        <span>Palavra e tinta iguais: <span id="tempo-igual">0</span> ms</span>
         <div class="trilho"><div id="barra-igual"></div></div>
       </div>
-      <div class="linha
+      <div class="linha-tempo">
+        <span>Palavra e tinta diferentes: <span id="tempo-diferente">0</span> ms</span>
+        <div class="trilho"><div id="barra-diferente"></div></div>
+      </div>
+    </div>
+
+    <p id="mensagem-resultado"></p>
+
+    <div class="cartao">
+      <p><strong>📖 Leitura automática.</strong> Seu cérebro leu a palavra antes que você pudesse impedir. A leitura é tão treinada que acontece sozinha.</p>
+    </div
