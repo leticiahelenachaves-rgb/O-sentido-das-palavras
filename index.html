@@ -847,14 +847,7 @@
       current++;
 
       if (current < challenges.length) {
-      document.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("startButton").addEventListener("click", () => {
-    document.getElementById("game").scrollIntoView({
-      behavior: "smooth"
-    });
-  });
-});
 
       } else {
         showResult();
@@ -893,11 +886,6 @@
       result.style.display = "none";
       loadChallenge();
 
-      document.getElementById("game").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-
     loadChallenge();
     document.addEventListener("DOMContentLoaded", function () {
   loadChallenge();
@@ -909,6 +897,17 @@
   document.getElementById("startButton").addEventListener("click", function () {
     loadChallenge();
   });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  loadChallenge();
+
+  const startButton = document.getElementById("startButton");
+
+  if (startButton) {
+    startButton.addEventListener("click", function () {
+      loadChallenge();
+    });
+  }
 });
 
   </script>
