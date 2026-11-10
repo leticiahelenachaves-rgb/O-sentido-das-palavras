@@ -482,10 +482,10 @@
           Uma experiência para descobrir como o cérebro usa o contexto
           para entender palavras que podem ter mais de um significado.
         </p>
-        <a href="#game" class="btn btn-primary" id="startButton">
+       <button type="button" class="btn btn-primary" id="startButton">
   Começar desafio
-</a>
-
+</button>
+        
         <a href="#como-funciona" class="btn btn-secondary">Como funciona</a>
       </div>
 
@@ -848,7 +848,6 @@
 
       if (current < challenges.length) {
       document.addEventListener("DOMContentLoaded", () => {
-  loadChallenge();
 
   document.getElementById("startButton").addEventListener("click", () => {
     document.getElementById("game").scrollIntoView({
@@ -900,6 +899,18 @@
     }
 
     loadChallenge();
+    document.addEventListener("DOMContentLoaded", function () {
+  loadChallenge();
+
+  const startButton = document.getElementById("startButton");
+
+  startButton.addEventListener("click", function () {
+    loadChallenge();
+  document.getElementById("startButton").addEventListener("click", function () {
+    loadChallenge();
+  });
+});
+
   </script>
 </body>
 </html>
