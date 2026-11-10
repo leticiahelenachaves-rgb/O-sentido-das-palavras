@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>O Sentido das Palavras | Desafio Stroop</title>
 
   <style>
     :root {
-      --lilas: #8d7bb8;
-      --lilas-escuro: #70619a;
-      --lilas-claro: #eeeafb;
-      --creme: #fff3be;
-      --rosa: #efb0b5;
-      --rosa-claro: #fde4e1;
-      --preto: #17151c;
-      --cinza: #686472;
+      --lilas-escuro: #493b86;
+      --lilas: #7665b8;
+      --lilas-claro: #eeeafd;
+      --creme: #f8f5ef;
+      --rosa: #e9bfc7;
+      --rosa-claro: #f7e8eb;
+      --preto: #24212b;
+      --cinza: #6f6a78;
       --branco: #ffffff;
-      --verde: #35a66f;
-      --vermelho: #d95b67;
-      --amarelo: #e8bc40;
-      --azul: #6194d8;
+      --verde: #348b68;
+      --vermelho: #b85058;
+      --amarelo: #e5ba3f;
+      --azul: #5685bd;
+      --sombra: 0 18px 45px rgba(52, 42, 87, 0.14);
     }
 
     * {
@@ -31,291 +31,277 @@
 
     body {
       min-height: 100vh;
-      padding: 24px 14px;
+      padding: 22px 16px;
+      background:
+        radial-gradient(circle at top left, rgba(233, 191, 199, 0.55), transparent 34%),
+        linear-gradient(145deg, #f5e8e9 0%, #eeeafd 48%, #e3def6 100%);
       color: var(--preto);
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 0% 0%, var(--creme) 0 20%, transparent 20.5%),
-        radial-gradient(circle at 100% 10%, var(--rosa) 0 18%, transparent 18.5%),
-        radial-gradient(circle at 100% 100%, var(--creme) 0 22%, transparent 22.5%),
-        linear-gradient(135deg, var(--lilas) 0 48%, var(--rosa) 48% 72%, var(--creme) 72%);
-      background-attachment: fixed;
     }
 
     button {
-      font: inherit;
+      font-family: inherit;
     }
 
     .app {
-      width: min(100%, 620px);
+      width: 100%;
+      max-width: 620px;
       margin: 0 auto;
     }
 
     .tela {
       position: relative;
       overflow: hidden;
-      padding: clamp(24px, 5vw, 42px);
-      border: 3px solid var(--preto);
-      border-radius: 34px;
-      background: var(--branco);
-      box-shadow: 10px 12px 0 rgba(23, 21, 28, 0.9);
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(73, 59, 134, 0.12);
+      border-radius: 28px;
+      padding: 34px 28px;
+      box-shadow: var(--sombra);
       animation: aparecer 0.35s ease;
     }
 
-    .tela::before,
-    .tela::after {
+    .tela::before {
       content: "";
       position: absolute;
-      width: 18px;
-      height: 18px;
-      background: var(--lilas);
-      clip-path: polygon(
-        50% 0%, 62% 25%, 88% 12%, 78% 39%,
-        100% 50%, 75% 62%, 88% 88%, 61% 77%,
-        50% 100%, 38% 75%, 12% 88%, 23% 61%,
-        0% 50%, 25% 38%, 12% 12%, 39% 24%
-      );
-    }
-
-    .tela::before {
-      top: 22px;
-      left: 22px;
-    }
-
-    .tela::after {
-      right: 22px;
-      bottom: 22px;
+      width: 160px;
+      height: 160px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: var(--rosa);
+      opacity: 0.3;
+      pointer-events: none;
     }
 
     .oculta {
       display: none;
     }
 
-    .marca {
-      display: inline-block;
-      margin-bottom: 18px;
-      color: var(--lilas-escuro);
-      font-size: 0.84rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
     .etapa {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 18px;
-      padding: 8px 14px;
-      border: 2px solid var(--preto);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 8px 13px;
+      border: 1px solid rgba(73, 59, 134, 0.22);
       border-radius: 999px;
-      color: var(--preto);
-      background: var(--creme);
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.04em;
+      color: var(--lilas-escuro);
+      background: var(--lilas-claro);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     h1,
     h2 {
+      position: relative;
       color: var(--lilas-escuro);
-      font-weight: 950;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      max-width: 450px;
+      margin-bottom: 10px;
+      font-size: clamp(30px, 7vw, 48px);
       line-height: 0.98;
       text-transform: uppercase;
     }
 
-    h1 {
-      max-width: 500px;
-      margin-bottom: 14px;
-      font-size: clamp(2.3rem, 9vw, 4.8rem);
-    }
-
     h2 {
-      margin-bottom: 16px;
-      font-size: clamp(2rem, 7vw, 3.1rem);
-    }
-
-    .subtitulo {
-      max-width: 470px;
-      margin-bottom: 28px;
-      color: var(--cinza);
-      font-size: 1.15rem;
-      line-height: 1.45;
+      margin-bottom: 14px;
+      font-size: clamp(25px, 6vw, 36px);
+      line-height: 1.05;
     }
 
     p {
       line-height: 1.6;
+      font-size: 16px;
     }
 
-    .intro-ilustracao {
+    .subtitulo {
+      margin-bottom: 28px;
+      color: var(--cinza);
+      font-size: 17px;
+    }
+
+    .linha-conceito {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 115px;
-      margin: 22px 0 28px;
-      border: 2px solid var(--preto);
-      border-radius: 28px;
+      gap: 13px;
+      min-height: 78px;
+      margin-bottom: 24px;
+      padding: 16px;
+      border: 1px solid rgba(73, 59, 134, 0.23);
+      border-radius: 18px;
       color: var(--lilas-escuro);
-      background: var(--lilas-claro);
-      font-size: clamp(2.8rem, 12vw, 5rem);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+    }
+
+    .linha-conceito i {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      background: var(--rosa);
+      transform: rotate(45deg);
     }
 
     .cartao {
       position: relative;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       padding: 17px 18px;
-      border: 2px solid var(--preto);
-      border-radius: 18px;
-      background: var(--lilas-claro);
-    }
-
-    .cartao:nth-of-type(2) {
-      background: var(--rosa-claro);
-    }
-
-    .cartao:nth-of-type(3) {
+      border-left: 4px solid var(--rosa);
+      border-radius: 0 16px 16px 0;
       background: var(--creme);
     }
 
     .cartao strong {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       color: var(--lilas-escuro);
-      font-size: 1.04rem;
+      font-size: 15px;
+      letter-spacing: 0.02em;
     }
 
-    .botao {
-      width: 100%;
-      margin-top: 12px;
-      padding: 17px 20px;
-      border: 2px solid var(--preto);
-      border-radius: 16px;
-      color: var(--branco);
-      background: var(--lilas-escuro);
-      box-shadow: 4px 5px 0 var(--preto);
-      cursor: pointer;
-      font-weight: 900;
-      transition: 0.18s ease;
-    }
-
-    .botao:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 7px 0 var(--preto);
-    }
-
-    .botao:active {
-      transform: translate(2px, 3px);
-      box-shadow: 1px 2px 0 var(--preto);
-    }
-
-    .botao.secundario {
-      color: var(--preto);
-      background: var(--creme);
-    }
-
-    .botao:focus-visible,
-    .opcao:focus-visible {
-      outline: 4px solid var(--rosa);
-      outline-offset: 3px;
+    .cartao p {
+      color: #46414d;
+      font-size: 15px;
     }
 
     .regras {
       display: grid;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 10px;
+      margin: 22px 0;
       list-style: none;
+      counter-reset: regras;
     }
 
     .regras li {
-      display: flex;
-      gap: 12px;
-      padding: 15px;
-      border: 2px solid var(--preto);
-      border-radius: 16px;
-      background: var(--lilas-claro);
-      line-height: 1.45;
+      position: relative;
+      padding: 16px 16px 16px 50px;
+      border: 1px solid rgba(73, 59, 134, 0.1);
+      border-radius: 15px;
+      background: var(--creme);
+      color: #46414d;
+      line-height: 1.5;
+      counter-increment: regras;
     }
 
-    .numero-regra {
-      display: grid;
-      flex: 0 0 30px;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      color: var(--branco);
-      background: var(--lilas-escuro);
-      font-weight: 900;
+    .regras li::before {
+      content: counter(regras, decimal-leading-zero);
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      color: var(--lilas);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+
+    .regras strong {
+      color: var(--lilas-escuro);
     }
 
     .exemplo {
-      margin: 20px 0 26px;
-      padding: 22px;
-      border: 2px solid var(--preto);
-      border-radius: 22px;
-      text-align: center;
+      margin: 24px 0;
+      padding: 23px 18px;
+      border-radius: 20px;
       background: var(--preto);
-      color: var(--branco);
+      color: #f8f5ef;
+      text-align: center;
     }
 
-    .exemplo small {
-      color: var(--creme);
-      font-weight: bold;
-      text-transform: uppercase;
+    .exemplo p {
+      color: #d8d2e4;
+      font-size: 14px;
     }
 
     .palavra-exemplo {
-      margin: 12px 0;
+      margin: 13px 0;
       color: var(--vermelho);
-      font-size: clamp(2.4rem, 10vw, 4rem);
-      font-weight: 950;
+      font-size: 40px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+
+    .exemplo strong {
+      color: var(--rosa);
+    }
+
+    .botao {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 17px 20px;
+      border: 0;
+      border-radius: 15px;
+      background: var(--lilas-escuro);
+      color: var(--branco);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .botao:hover {
+      background: var(--lilas);
+      box-shadow: 0 8px 18px rgba(73, 59, 134, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .botao:active {
+      transform: scale(0.98);
+    }
+
+    .botao.secundario {
+      background: transparent;
+      color: var(--lilas-escuro);
+      border: 1px solid rgba(73, 59, 134, 0.25);
+    }
+
+    .botao.secundario:hover {
+      background: var(--lilas-claro);
+      box-shadow: none;
     }
 
     /* Jogo */
 
-    .cabecalho-jogo {
+    .topo-jogo {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 10px;
       color: var(--lilas-escuro);
-      font-size: 0.92rem;
-      font-weight: 900;
-    }
-
-    .placar-mini {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--creme);
-      white-space: nowrap;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     .barra {
-      height: 13px;
-      margin-bottom: 28px;
+      height: 9px;
       overflow: hidden;
-      border: 2px solid var(--preto);
+      margin-bottom: 25px;
       border-radius: 999px;
-      background: var(--branco);
+      background: #e5e1eb;
     }
 
     .barra-preenchida {
       width: 0%;
       height: 100%;
-      background: var(--lilas-escuro);
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--rosa), var(--lilas));
       transition: width 0.3s ease;
     }
 
     .instrucao {
       margin-bottom: 12px;
       color: var(--cinza);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 0.13em;
       text-align: center;
-      font-size: 0.95rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
@@ -325,25 +311,23 @@
       justify-content: center;
       min-height: 190px;
       margin-bottom: 14px;
-      border: 3px solid var(--preto);
-      border-radius: 24px;
+      border-radius: 22px;
       background: var(--preto);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
     }
 
     #palavra {
-      font-size: clamp(2.5rem, 12vw, 5rem);
-      font-weight: 950;
-      letter-spacing: 0.04em;
-      text-align: center;
-      text-transform: uppercase;
+      font-size: clamp(38px, 10vw, 62px);
+      font-weight: bold;
+      letter-spacing: 0.08em;
     }
 
     #feedback {
-      min-height: 34px;
+      min-height: 27px;
       margin-bottom: 12px;
+      font-size: 15px;
+      font-weight: bold;
       text-align: center;
-      font-size: 1rem;
-      font-weight: 900;
     }
 
     .certo {
@@ -357,100 +341,87 @@
     .opcoes {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 11px;
     }
 
     .opcao {
-      min-height: 68px;
+      min-height: 64px;
       padding: 14px 8px;
-      border: 2px solid var(--preto);
-      border-radius: 16px;
+      border: 0;
+      border-radius: 15px;
       color: var(--branco);
-      box-shadow: 4px 5px 0 var(--preto);
       cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 950;
-      transition: 0.15s ease;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
 
     .opcao:hover {
-      transform: translate(-2px, -2px);
-      filter: brightness(1.06);
+      filter: brightness(1.08);
+      transform: translateY(-2px);
     }
 
     .opcao:active {
-      transform: translate(2px, 3px);
-      box-shadow: 1px 2px 0 var(--preto);
-    }
-
-    .opcao.amarelo {
-      color: var(--preto);
+      transform: scale(0.97);
     }
 
     /* Resultado */
 
-    .placar-final {
+    .placar {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 11px;
       margin: 24px 0;
     }
 
-    .numero-final {
-      display: block;
-      color: var(--lilas-escuro);
-      font-size: clamp(1.8rem, 7vw, 3rem);
-      font-weight: 950;
-    }
-
-    .item-placar {
-      padding: 18px 10px;
-      border: 2px solid var(--preto);
-      border-radius: 18px;
-      text-align: center;
+    .placar div {
+      padding: 19px 10px;
+      border-radius: 17px;
       background: var(--lilas-claro);
+      text-align: center;
     }
 
-    .item-placar:nth-child(2) {
-      background: var(--creme);
-    }
-
-    .rotulo {
-      color: var(--cinza);
-      font-size: 0.82rem;
+    .placar .numero {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--lilas-escuro);
+      font-size: 28px;
       font-weight: bold;
     }
 
+    .placar .rotulo {
+      color: var(--cinza);
+      font-size: 12px;
+    }
+
     .comparacao {
-      margin-bottom: 24px;
+      margin-bottom: 25px;
     }
 
     .linha-tempo {
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
 
-    .linha-tempo-label {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 6px;
-      font-size: 0.9rem;
-      font-weight: 900;
+    .linha-tempo > span {
+      color: #46414d;
+      font-size: 13px;
+      font-weight: bold;
     }
 
     .trilho {
-      height: 20px;
+      height: 14px;
       overflow: hidden;
-      border: 2px solid var(--preto);
+      margin-top: 7px;
       border-radius: 999px;
-      background: var(--branco);
+      background: #e5e1eb;
     }
 
     .trilho div {
       width: 0%;
       height: 100%;
       border-radius: 999px;
-      transition: width 0.8s ease;
+      transition: width 0.7s ease;
     }
 
     #barra-igual {
@@ -464,17 +435,17 @@
     #mensagem-resultado {
       margin-bottom: 22px;
       padding: 16px;
-      border: 2px solid var(--preto);
-      border-radius: 17px;
+      border-radius: 15px;
       background: var(--rosa-claro);
+      color: var(--lilas-escuro);
+      font-size: 15px;
       font-weight: bold;
-      line-height: 1.5;
     }
 
     @keyframes aparecer {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(8px);
       }
 
       to {
@@ -485,20 +456,29 @@
 
     @media (max-width: 430px) {
       body {
-        padding: 12px 8px;
+        padding: 12px;
       }
 
       .tela {
-        border-radius: 26px;
-        box-shadow: 6px 8px 0 var(--preto);
+        padding: 27px 19px;
+        border-radius: 22px;
+      }
+
+      .linha-conceito {
+        gap: 8px;
+        font-size: 9px;
+      }
+
+      .topo-jogo {
+        font-size: 12px;
       }
 
       .opcoes {
-        gap: 9px;
+        gap: 8px;
       }
 
       .opcao {
-        font-size: 0.82rem;
+        font-size: 12px;
       }
     }
   </style>
@@ -507,39 +487,42 @@
 <body>
   <main class="app">
 
-    <!-- TELA 1 -->
+    <!-- TELA 1: APRENDER -->
     <section id="tela-aprender" class="tela">
-      <span class="marca">Mostra de Neurofisiologia</span>
       <span class="etapa">Etapa 1 de 4 · Aprender</span>
 
       <h1>O sentido das palavras</h1>
 
       <p class="subtitulo">
-        Descubra como o cérebro lê automaticamente — mesmo quando você tenta prestar atenção em outra coisa.
+        Como o cérebro lê, mesmo quando você não quer.
       </p>
 
-      <div class="intro-ilustracao" aria-hidden="true">
-        🧠 ✦ 👁️
+      <div class="linha-conceito" aria-label="Palavra, tinta e resposta">
+        <span>PALAVRA</span>
+        <i></i>
+        <span>TINTA</span>
+        <i></i>
+        <span>RESPOSTA</span>
       </div>
 
       <div class="cartao">
         <p>
-          <strong>🧠 A leitura acontece sozinha</strong>
+          <strong>Leitura automática</strong>
           Depois que aprendemos a ler, o cérebro reconhece palavras em uma fração de segundo, sem esforço consciente.
         </p>
       </div>
 
       <div class="cartao">
         <p>
-          <strong>👁️ Dos olhos ao significado</strong>
-          A informação visual chega ao cérebro, é reconhecida como palavra e segue para áreas ligadas à linguagem.
+          <strong>Da imagem ao significado</strong>
+          A imagem da palavra é processada pelo sistema visual, reconhecida como linguagem e associada ao seu significado.
         </p>
       </div>
 
       <div class="cartao">
         <p>
-          <strong>⚡ O conflito cria um desafio</strong>
-          Quando a palavra diz uma coisa, mas a tarefa pede outra, o cérebro precisa controlar uma resposta automática.
+          <strong>Quando surge um conflito</strong>
+          Se a palavra diz uma coisa e a tarefa pede outra, o cérebro precisa interromper uma resposta automática. É isso que você vai sentir no jogo.
         </p>
       </div>
 
@@ -548,47 +531,38 @@
       </button>
     </section>
 
-    <!-- TELA 2 -->
+    <!-- TELA 2: REGRAS -->
     <section id="tela-regras" class="tela oculta">
       <span class="etapa">Etapa 2 de 4 · Regras</span>
 
       <h2>Como jogar</h2>
 
-      <ul class="regras">
+      <ol class="regras">
         <li>
-          <span class="numero-regra">1</span>
-          <span>Uma palavra aparecerá escrita com uma tinta colorida.</span>
+          Vai aparecer o nome de uma cor escrito com uma tinta colorida.
         </li>
 
         <li>
-          <span class="numero-regra">2</span>
-          <span>Toque no botão correspondente à <strong>cor da tinta</strong>.</span>
+          Toque no botão correspondente à <strong>cor da tinta</strong>, não à palavra escrita.
         </li>
 
         <li>
-          <span class="numero-regra">3</span>
-          <span>Ignore o significado da palavra e responda o mais rápido possível.</span>
+          Responda o mais rápido que conseguir. Serão 8 rodadas.
         </li>
-
-        <li>
-          <span class="numero-regra">4</span>
-          <span>Você terá <strong>8 rodadas</strong> para observar o seu resultado.</span>
-        </li>
-      </ul>
+      </ol>
 
       <div class="exemplo">
-        <small>Exemplo</small>
+        <p>Exemplo:</p>
 
         <div class="palavra-exemplo">AZUL</div>
 
         <p>
-          A resposta correta é <strong>VERMELHO</strong>,
-          porque essa é a cor da tinta.
+          A resposta correta é <strong>VERMELHO</strong>, porque essa é a cor da tinta.
         </p>
       </div>
 
       <button class="botao" onclick="iniciarJogo()">
-        Começar o desafio
+        Começar desafio
       </button>
 
       <button class="botao secundario" onclick="mostrarTela('tela-aprender')">
@@ -596,72 +570,70 @@
       </button>
     </section>
 
-    <!-- TELA 3 -->
+    <!-- TELA 3: JOGO -->
     <section id="tela-jogo" class="tela oculta">
       <span class="etapa">Etapa 3 de 4 · Jogar</span>
 
-      <div class="cabecalho-jogo">
+      <div class="topo-jogo">
         <span id="contador">Rodada 1 de 8</span>
-        <span class="placar-mini" id="pontos">Acertos: 0</span>
+        <span id="pontos">Acertos: 0</span>
       </div>
 
-      <div class="barra" aria-label="Progresso do jogo">
-        <div id="progresso" class="barra-preenchida"></div>
+      <div class="barra">
+        <div class="barra-preenchida" id="progresso"></div>
       </div>
 
-      <p class="instrucao">
-        Qual é a cor da tinta?
-      </p>
+      <p class="instrucao">Qual é a cor da tinta?</p>
 
       <div class="palco">
-        <span id="palavra" aria-live="polite"></span>
+        <span id="palavra"></span>
       </div>
 
       <div id="feedback" aria-live="polite"></div>
 
       <div class="opcoes">
-        <button class="opcao" style="background: var(--vermelho)" onclick="responder(0)">
+        <button class="opcao" style="background: #b85058" onclick="responder(0)">
           VERMELHO
         </button>
 
-        <button class="opcao" style="background: var(--azul)" onclick="responder(1)">
+        <button class="opcao" style="background: #5685bd" onclick="responder(1)">
           AZUL
         </button>
 
-        <button class="opcao" style="background: var(--verde)" onclick="responder(2)">
+        <button class="opcao" style="background: #348b68" onclick="responder(2)">
           VERDE
         </button>
 
-        <button class="opcao amarelo" style="background: var(--amarelo)" onclick="responder(3)">
+        <button class="opcao" style="background: #d1a928; color: #24212b" onclick="responder(3)">
           AMARELO
         </button>
       </div>
     </section>
 
-    <!-- TELA 4 -->
+    <!-- TELA 4: RESULTADO -->
     <section id="tela-resultado" class="tela oculta">
       <span class="etapa">Etapa 4 de 4 · Descobrir</span>
 
-      <h2>Seu cérebro em ação</h2>
+      <h2>O que aconteceu no seu cérebro</h2>
 
-      <div class="placar-final">
-        <div class="item-placar">
-          <span class="numero-final" id="res-acertos">0</span>
+      <div class="placar">
+        <div>
+          <span class="numero" id="res-acertos">0</span>
           <span class="rotulo">acertos em 8</span>
         </div>
 
-        <div class="item-placar">
-          <span class="numero-final" id="res-diferenca">0 ms</span>
+        <div>
+          <span class="numero" id="res-diferenca">0 ms</span>
           <span class="rotulo">diferença de tempo</span>
         </div>
       </div>
 
       <div class="comparacao">
         <div class="linha-tempo">
-          <div class="linha-tempo-label">
-            <span>Palavra e tinta iguais</span>
-            <span id="tempo-igual">0 ms</span>
-          </div>
+          <span>
+            Palavra e tinta iguais:
+            <span id="tempo-igual">0</span> ms
+          </span>
 
           <div class="trilho">
             <div id="barra-igual"></div>
@@ -669,10 +641,10 @@
         </div>
 
         <div class="linha-tempo">
-          <div class="linha-tempo-label">
-            <span>Palavra e tinta diferentes</span>
-            <span id="tempo-diferente">0 ms</span>
-          </div>
+          <span>
+            Palavra e tinta diferentes:
+            <span id="tempo-diferente">0</span> ms
+          </span>
 
           <div class="trilho">
             <div id="barra-diferente"></div>
@@ -684,29 +656,29 @@
 
       <div class="cartao">
         <p>
-          <strong>📖 Leitura automática</strong>
-          Seu cérebro reconheceu a palavra antes que você pudesse impedir. A leitura é uma habilidade muito treinada.
+          <strong>Leitura automática</strong>
+          Seu cérebro leu a palavra antes que você pudesse impedir. A leitura é tão treinada que acontece sozinha.
         </p>
       </div>
 
       <div class="cartao">
         <p>
-          <strong>🚨 Detecção do conflito</strong>
+          <strong>Detecção do conflito</strong>
           Quando a palavra e a tinta não combinam, duas respostas competem. O cérebro precisa identificar esse conflito.
         </p>
       </div>
 
       <div class="cartao">
         <p>
-          <strong>🎯 Controle da resposta</strong>
-          O córtex pré-frontal mantém a regra — responder à tinta — e inibe a resposta automática da leitura.
+          <strong>Controle da resposta</strong>
+          O córtex pré-frontal mantém a regra do jogo — responder à tinta — e inibe a resposta automática.
         </p>
       </div>
 
       <div class="cartao">
         <p>
-          <strong>💡 O Efeito Stroop</strong>
-          Esse fenômeno mostra que o significado das palavras é processado automaticamente, mesmo quando isso atrapalha a tarefa.
+          <strong>O efeito Stroop</strong>
+          Esse fenômeno mostra que o significado das palavras é processado automaticamente, mesmo quando tentamos ignorá-lo.
         </p>
       </div>
 
@@ -725,29 +697,29 @@
     const CORES = [
       {
         nome: "VERMELHO",
-        hex: "#d95b67"
+        hex: "#b85058"
       },
       {
         nome: "AZUL",
-        hex: "#6194d8"
+        hex: "#5685bd"
       },
       {
         nome: "VERDE",
-        hex: "#35a66f"
+        hex: "#348b68"
       },
       {
         nome: "AMARELO",
-        hex: "#e8bc40"
+        hex: "#e5ba3f"
       }
     ];
 
-    const TOTAL_RODADAS = 8;
+    const TOTAL = 8;
 
     let rodadas = [];
-    let rodadaAtual = 0;
+    let atual = 0;
     let acertos = 0;
-    let inicioResposta = 0;
-    let bloqueado = true;
+    let inicio = 0;
+    let travado = true;
 
     let tempos = {
       igual: [],
@@ -757,7 +729,7 @@
     function mostrarTela(id) {
       const telas = document.querySelectorAll(".tela");
 
-      telas.forEach(tela => {
+      telas.forEach(function(tela) {
         tela.classList.add("oculta");
       });
 
@@ -770,44 +742,38 @@
     }
 
     function embaralhar(lista) {
-      const copia = [...lista];
-
-      for (let i = copia.length - 1; i > 0; i--) {
+      for (let i = lista.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
 
-        [copia[i], copia[j]] = [copia[j], copia[i]];
+        const temporario = lista[i];
+        lista[i] = lista[j];
+        lista[j] = temporario;
       }
 
-      return copia;
+      return lista;
     }
 
     function criarRodadas() {
       const lista = [];
 
-      for (let i = 0; i < TOTAL_RODADAS; i++) {
+      for (let i = 0; i < TOTAL; i++) {
         const palavra = Math.floor(Math.random() * CORES.length);
 
-        let tinta;
-        let tipo;
+        let tinta = palavra;
+        let tipo = "igual";
 
-        // Alterna entre rodadas iguais e diferentes
-        if (i % 2 === 0) {
-          tinta = palavra;
-          tipo = "igual";
-        } else {
-          tinta = Math.floor(Math.random() * CORES.length);
+        if (i % 2 === 1) {
+          tipo = "diferente";
 
           while (tinta === palavra) {
             tinta = Math.floor(Math.random() * CORES.length);
           }
-
-          tipo = "diferente";
         }
 
         lista.push({
-          palavra,
-          tinta,
-          tipo
+          palavra: palavra,
+          tinta: tinta,
+          tipo: tipo
         });
       }
 
@@ -816,9 +782,8 @@
 
     function iniciarJogo() {
       rodadas = criarRodadas();
-      rodadaAtual = 0;
+      atual = 0;
       acertos = 0;
-      bloqueado = true;
 
       tempos = {
         igual: [],
@@ -831,45 +796,45 @@
       document.getElementById("barra-diferente").style.width = "0%";
 
       mostrarTela("tela-jogo");
-
-      setTimeout(proximaRodada, 250);
+      proximaRodada();
     }
 
     function proximaRodada() {
-      if (rodadaAtual >= TOTAL_RODADAS) {
+      if (atual >= TOTAL) {
         mostrarResultado();
         return;
       }
 
-      const rodada = rodadas[rodadaAtual];
-      const palavra = document.getElementById("palavra");
-      const feedback = document.getElementById("feedback");
+      const rodada = rodadas[atual];
+      const palavraElemento = document.getElementById("palavra");
 
-      palavra.textContent = CORES[rodada.palavra].nome;
-      palavra.style.color = CORES[rodada.tinta].hex;
+      palavraElemento.textContent = CORES[rodada.palavra].nome;
+      palavraElemento.style.color = CORES[rodada.tinta].hex;
 
       document.getElementById("contador").textContent =
-        `Rodada ${rodadaAtual + 1} de ${TOTAL_RODADAS}`;
+        "Rodada " + (atual + 1) + " de " + TOTAL;
 
       document.getElementById("progresso").style.width =
-        `${(rodadaAtual / TOTAL_RODADAS) * 100}%`;
+        (atual / TOTAL * 100) + "%";
+
+      const feedback = document.getElementById("feedback");
 
       feedback.textContent = "";
       feedback.className = "";
 
-      inicioResposta = performance.now();
-      bloqueado = false;
+      inicio = Date.now();
+      travado = false;
     }
 
     function responder(indice) {
-      if (bloqueado) {
+      if (travado) {
         return;
       }
 
-      bloqueado = true;
+      travado = true;
 
-      const rodada = rodadas[rodadaAtual];
-      const tempo = Math.round(performance.now() - inicioResposta);
+      const tempo = Date.now() - inicio;
+      const rodada = rodadas[atual];
 
       tempos[rodada.tipo].push(tempo);
 
@@ -878,72 +843,72 @@
       if (indice === rodada.tinta) {
         acertos++;
 
-        feedback.textContent = "✓ Resposta certa";
+        feedback.textContent = "Certo";
         feedback.className = "certo";
       } else {
         feedback.textContent =
-          `✕ A tinta era ${CORES[rodada.tinta].nome}`;
+          "A tinta era " + CORES[rodada.tinta].nome;
 
         feedback.className = "errado";
       }
 
       document.getElementById("pontos").textContent =
-        `Acertos: ${acertos}`;
+        "Acertos: " + acertos;
 
-      rodadaAtual++;
+      atual++;
 
-      setTimeout(proximaRodada, 650);
+      setTimeout(proximaRodada, 800);
     }
 
-    function calcularMedia(lista) {
+    function media(lista) {
       if (lista.length === 0) {
         return 0;
       }
 
-      const soma = lista.reduce((total, valor) => total + valor, 0);
+      let soma = 0;
+
+      for (let i = 0; i < lista.length; i++) {
+        soma += lista[i];
+      }
 
       return Math.round(soma / lista.length);
     }
 
     function mostrarResultado() {
-      const mediaIgual = calcularMedia(tempos.igual);
-      const mediaDiferente = calcularMedia(tempos.diferente);
+      const mediaIgual = media(tempos.igual);
+      const mediaDiferente = media(tempos.diferente);
       const diferenca = mediaDiferente - mediaIgual;
-      const maiorTempo = Math.max(mediaIgual, mediaDiferente, 1);
+      const maior = Math.max(mediaIgual, mediaDiferente, 1);
 
       document.getElementById("res-acertos").textContent = acertos;
 
       document.getElementById("res-diferenca").textContent =
-        `${diferenca >= 0 ? "+" : ""}${diferenca} ms`;
+        (diferenca > 0 ? "+" : "") + diferenca + " ms";
 
-      document.getElementById("tempo-igual").textContent =
-        `${mediaIgual} ms`;
-
-      document.getElementById("tempo-diferente").textContent =
-        `${mediaDiferente} ms`;
+      document.getElementById("tempo-igual").textContent = mediaIgual;
+      document.getElementById("tempo-diferente").textContent = mediaDiferente;
 
       const mensagem = document.getElementById("mensagem-resultado");
 
       if (diferenca > 0) {
         mensagem.textContent =
-          `Você demorou ${diferenca} ms a mais nas rodadas em que a palavra e a tinta eram diferentes. Esse atraso é o Efeito Stroop: seu cérebro precisou controlar a leitura automática.`;
-      } else if (diferenca < 0) {
-        mensagem.textContent =
-          `Nesta tentativa, você foi ${Math.abs(diferenca)} ms mais rápido nas rodadas diferentes. Como foram apenas ${TOTAL_RODADAS} rodadas, pequenas variações são esperadas.`;
+          "Você demorou " +
+          diferenca +
+          " ms a mais quando a palavra e a tinta eram diferentes. Esse atraso é o Efeito Stroop: seu cérebro precisou frear a leitura antes de responder.";
       } else {
         mensagem.textContent =
-          "Os dois tipos de rodada tiveram o mesmo tempo médio nesta tentativa. Com poucas rodadas, pequenas diferenças podem desaparecer.";
+          "Desta vez, você não ficou mais lento nas rodadas com conflito. Isso pode acontecer em poucas rodadas, mas geralmente a resposta demora mais quando a palavra e a tinta são diferentes.";
       }
 
       mostrarTela("tela-resultado");
 
-      setTimeout(() => {
+      setTimeout(function() {
         document.getElementById("barra-igual").style.width =
-          `${(mediaIgual / maiorTempo) * 100}%`;
+          (mediaIgual / maior * 100) + "%";
 
         document.getElementById("barra-diferente").style.width =
-          `${(mediaDiferente / maiorTempo) * 100}%`;
-      }, 200);
+          (mediaDiferente / maior * 100) + "%";
+      }, 100);
     }
   </script>
 </body>
